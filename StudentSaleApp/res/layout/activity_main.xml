@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <ImageButton
+        android:id="@+id/ibTakePhoto"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ivReturnedPic"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_launcher" />
+
+    <EditText
+        android:id="@+id/itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/ivReturnedPic"
+        android:layout_below="@+id/ivReturnedPic"
+        android:layout_marginTop="31dp"
+        android:ems="10"
+        android:hint="@string/edit_name" >
+       
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/itemDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="125dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/itemName"
+        android:layout_below="@+id/itemName"
+        android:layout_marginTop="37dp"
+        android:ems="10"
+        android:inputType="textMultiLine" 
+        android:hint="@string/edit_description"/>
+
+    <Button
+        android:id="@+id/postItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/itemDescription"
+        android:layout_below="@+id/itemDescription"
+        android:layout_marginTop="28dp"
+        android:onClick="postItem"
+        android:text="@string/post" />
+
+</RelativeLayout>
