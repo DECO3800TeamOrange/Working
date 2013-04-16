@@ -22,5 +22,13 @@
         android:layout_marginTop="16dp"
         android:text="@string/description"/>
 
+    <ImageView
+        android:id="@+id/item_photo"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_below="@+id/description"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:src="@drawable/ic_launcher" />
 
 </RelativeLayout>

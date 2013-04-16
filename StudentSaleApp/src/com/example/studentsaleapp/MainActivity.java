@@ -6,8 +6,11 @@ import java.io.InputStream;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.PushService;
+import com.parse.SaveCallback;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.WallpaperManager;
@@ -25,6 +28,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	
 	public final static String PHOTO = "com.example.StudentSaleApp.PHOTO";
 	public final static String OBJECT_ID = "com.example.StudentSaleApp.OBJECTID";
+	public final static String ITEM_NAME = "com.example.StudentSaleApp.ITEM_NAME";
+	public final static String ITEM_DESC = "com.example.StudentSaleApp.ITEM_DESC";
+	
 	
 	ImageButton ib;
 	ImageView iv;
@@ -35,15 +41,19 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	WallpaperManager wallpaperManager;
 	String itemName;
 	String itemDescription;
+	String itemID;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Parse.initialize(this, "gkmWKqQ1qSDSPZeIVoYT7trj1u4OSGhaJCXuQlwF","uHDDpxsL0xkzST0b9Afajty3lZJCQzdSDl9mEW9s"); 
+		Parse.initialize(this, "oSVz4UWfUShEgXckKkqA2G4gESIle3GL0egGqEQI","BU5O1f2A26nLwQOzTB4WEucrKGH7JU7tSyC1d7GW"); 
 		setContentView(R.layout.activity_main);
 		initialize();
+		
+		//make photo a default picture then write over byte[] later with real photo
 		InputStream is = getResources().openRawResource(R.drawable.ic_launcher);
 		itemPhoto = BitmapFactory.decodeStream(is);
+		photoByteStream = convertBmpToBytes(itemPhoto);
 	}
 
 	private void initialize() {
@@ -61,7 +71,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
 			i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 			startActivityForResult(i, cameraData);
 		break;
-		case R.id.postItem:
 			
 		}
 		
@@ -73,9 +82,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		if (resultCode == RESULT_OK) {
 			Bundle extras = data.getExtras();
 			itemPhoto = (Bitmap)extras.get("data");
-			ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			itemPhoto.compress(Bitmap.CompressFormat.PNG, 100, stream);
-			photoByteStream = stream.toByteArray();
+			
+			photoByteStream = convertBmpToBytes(itemPhoto);
+			
 			iv.setImageBitmap(itemPhoto);
 		}
 			
@@ -94,22 +103,36 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		itemName = editName.getText().toString();    
 		itemDescription = editDesc.getText().toString();
 		
-		ParseObject itemPost = new ParseObject("ItemPost");
-		
-		
-
+		final ParseObject itemPost = new ParseObject("ItemPost");
 		itemPost.put("ItemName", itemName);
 		itemPost.put("ItemDescription", itemDescription);
-		//itemPost.put("ItemPhoto", photoByteStream);
-		itemPost.saveInBackground();
+		if (photoByteStream != null)
+			itemPost.put("ItemPhoto", photoByteStream);
+		itemPost.saveInBackground(new SaveCallback() {
+			  public void done(ParseException e) {
+				    //  Access the object id here
+				  if (e != null) {
+					  	itemID = e.toString();}
+				  else {
+					  	itemID = itemPost.getObjectId();}
+				  }
+				});
 		
-		String itemID = itemPost.getObjectId();
-		System.out.println((itemID == null));
+
 
 		Intent newIntent = new Intent(this, PostedActivity.class);
 		newIntent.putExtra(OBJECT_ID, itemID);
 		newIntent.putExtra(PHOTO, photoByteStream);
+		newIntent.putExtra(ITEM_NAME, itemName);
+		newIntent.putExtra(ITEM_DESC, itemDescription);
 		startActivity(newIntent);
+	}
+	
+	public byte[] convertBmpToBytes(Bitmap bitmap) {
+		
+		ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+		return stream.toByteArray();
 	}
 	
 	
