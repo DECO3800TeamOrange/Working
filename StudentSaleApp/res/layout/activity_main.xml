@@ -3,14 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
-
-    <ImageButton
-        android:id="@+id/ibTakePhoto"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" />
+    
 
     <ImageView
         android:id="@+id/ivReturnedPic"
@@ -19,19 +12,19 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="20dp"
-        android:src="@drawable/ic_launcher" />
+        android:src="@drawable/ic_launcher" 
+        android:scaleType="centerCrop"
+        />
 
     <EditText
         android:id="@+id/itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/ibTakePhoto"
         android:layout_alignRight="@+id/ivReturnedPic"
         android:layout_below="@+id/ivReturnedPic"
         android:layout_marginTop="31dp"
-        android:ems="10"
         android:hint="@string/edit_name" >
-       
 
         <requestFocus />
     </EditText>
@@ -39,14 +32,15 @@
     <EditText
         android:id="@+id/itemDescription"
         android:layout_width="wrap_content"
-        android:layout_height="125dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ibTakePhoto"
         android:layout_alignRight="@+id/itemName"
         android:layout_below="@+id/itemName"
         android:layout_marginTop="37dp"
         android:ems="10"
-        android:inputType="textMultiLine" 
-        android:hint="@string/edit_description"/>
+        android:hint="@string/edit_description"
+        android:inputType="textMultiLine"
+        android:lines="4" />
 
     <Button
         android:id="@+id/postItem"
@@ -58,4 +52,23 @@
         android:onClick="postItem"
         android:text="@string/post" />
 
+    <EditText
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/postItem"
+        android:layout_alignLeft="@+id/itemDescription"
+        android:ems="10"
+        android:text="@string/location" />
+
+    <ImageButton
+        android:id="@+id/ibTakePhoto"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/itemName"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="24dp"
+        android:layout_toLeftOf="@+id/ivReturnedPic"
+        android:src="@drawable/camera" />
+    
 </RelativeLayout>

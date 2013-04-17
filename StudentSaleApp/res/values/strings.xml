@@ -14,5 +14,7 @@
     <string name="name">Name</string>
     <string name="description">description</string>
     <string name="photo">photo</string>
+    <string name="location">Your location: St. Lucia</string>
+   	<string name="buttonTakePhoto">Take a Pic</string>
 
 </resources>

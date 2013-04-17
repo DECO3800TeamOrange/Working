@@ -31,7 +31,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	public final static String ITEM_NAME = "com.example.StudentSaleApp.ITEM_NAME";
 	public final static String ITEM_DESC = "com.example.StudentSaleApp.ITEM_DESC";
 	
-	
 	ImageButton ib;
 	ImageView iv;
 	Intent i;
@@ -67,7 +66,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
-		case R.id.ibTakePhoto:
+		case R.id.ibTakePhoto :
 			i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 			startActivityForResult(i, cameraData);
 		break;
