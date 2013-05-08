@@ -99,7 +99,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	public void postItem(View view) {
 		EditText editName = (EditText) findViewById(R.id.itemName);
 		EditText editDesc = (EditText) findViewById(R.id.itemDescription);
-		itemName = editName.getText().toString();    
+		itemName = editName.getText().toString();
 		itemDescription = editDesc.getText().toString();
 		
 		final ParseObject itemPost = new ParseObject("ItemPost");
