@@ -30,7 +30,7 @@ public class Search extends Activity {
 		return true;
 	}
 	
-public void Retrieve(View view) {
+public void nameSearch(View view) {
 		
 		EditText editName = (EditText) findViewById(R.id.itemName);
 		EditText editDis = (EditText) findViewById(R.id.dis);
@@ -43,23 +43,28 @@ public void Retrieve(View view) {
 		ParseQuery query = new ParseQuery("search");
 			try {
 				query.whereContains("title", itemName);
-				try
+				if (editLower.length() > 0)
 				{
 					int lower = Integer.parseInt(editLower.getText().toString());
 					query.whereGreaterThanOrEqualTo("price", lower);
-				}catch(Exception e){}
-				try
+					
+				}
+				
+				if (editUpper.length() > 0)
 				{
 					int upper = Integer.parseInt(editUpper.getText().toString());
 					query.whereLessThanOrEqualTo("price", upper);
-				}catch(Exception e){}
-				try
+				}
+				
+				if (editDis.length() > 0)
 				{
 					int distance = Integer.parseInt(editDis.getText().toString());
 					ParseGeoPoint location = new ParseGeoPoint(-27.495069,152.984169);
 					query.whereWithinKilometers("location", location, distance);
-				}catch(Exception e){}
+				}
 				kids = query.find();
+				
+				
 				for (int i=0; i < kids.size(); i++){
 					ITEM_NAME2= ITEM_NAME2 +kids.get(i).getString("title")+"\n";
 					Log.i("Info",""+kids.size());
@@ -75,5 +80,8 @@ public void Retrieve(View view) {
 		
 		
 	}
+	public void locationSearch(View view) {
+		
+}
 
 }

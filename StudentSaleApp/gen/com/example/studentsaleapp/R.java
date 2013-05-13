@@ -48,8 +48,9 @@ public final class R {
         public static final int activity_main=0x7f030002;
         public static final int activity_posted=0x7f030003;
         public static final int activity_search=0x7f030004;
-        public static final int activity_seller_posts=0x7f030005;
-        public static final int photo=0x7f030006;
+        public static final int activity_search_results=0x7f030005;
+        public static final int activity_seller_posts=0x7f030006;
+        public static final int photo=0x7f030007;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
@@ -57,7 +58,8 @@ public final class R {
         public static final int home=0x7f070002;
         public static final int item=0x7f070003;
         public static final int search=0x7f070004;
-        public static final int seller_posts=0x7f070005;
+        public static final int search_results=0x7f070005;
+        public static final int seller_posts=0x7f070006;
     }
     public static final class string {
         public static final int action_settings=0x7f050010;
@@ -79,6 +81,7 @@ public final class R {
         public static final int title_activity_item=0x7f050013;
         public static final int title_activity_posted=0x7f050009;
         public static final int title_activity_search=0x7f050011;
+        public static final int title_activity_search_results=0x7f050014;
         public static final int title_activity_seller_posts=0x7f050012;
     }
     public static final class style {

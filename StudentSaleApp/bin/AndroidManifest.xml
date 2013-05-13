@@ -11,9 +11,9 @@
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -57,6 +57,10 @@
         <activity
             android:name="com.example.studentsaleapp.Item"
             android:label="@string/title_activity_item" >
+        </activity>
+        <activity
+            android:name="com.example.studentsaleapp.SearchResults"
+            android:label="@string/title_activity_search_results" >
         </activity>
     </application>
 
