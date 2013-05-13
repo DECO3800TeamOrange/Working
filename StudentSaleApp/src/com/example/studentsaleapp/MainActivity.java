@@ -36,7 +36,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	Intent i;
 	final static int cameraData = 0;
 	Bitmap itemPhoto;
+	Bitmap defaultPhoto;
 	byte[] photoByteStream;
+	byte[] defaultByteStream;
 	WallpaperManager wallpaperManager;
 	String itemName;
 	String itemDescription;
@@ -51,8 +53,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		
 		//make photo a default picture then write over byte[] later with real photo
 		InputStream is = getResources().openRawResource(R.drawable.ic_launcher);
-		itemPhoto = BitmapFactory.decodeStream(is);
-		photoByteStream = convertBmpToBytes(itemPhoto);
+		defaultPhoto = BitmapFactory.decodeStream(is);
+		defaultByteStream = convertBmpToBytes(defaultPhoto);
 	}
 
 	private void initialize() {
@@ -81,9 +83,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		if (resultCode == RESULT_OK) {
 			Bundle extras = data.getExtras();
 			itemPhoto = (Bitmap)extras.get("data");
-			
 			photoByteStream = convertBmpToBytes(itemPhoto);
-			
 			iv.setImageBitmap(itemPhoto);
 		}
 			
@@ -107,21 +107,25 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		itemPost.put("ItemDescription", itemDescription);
 		if (photoByteStream != null)
 			itemPost.put("ItemPhoto", photoByteStream);
+		else 
+			itemPost.put("ItemPhoto", defaultByteStream);
 		itemPost.saveInBackground(new SaveCallback() {
 			  public void done(ParseException e) {
 				    //  Access the object id here
 				  if (e != null) {
 					  	itemID = e.toString();}
 				  else {
-					  	itemID = itemPost.getObjectId();}
+					  	itemID = itemPost.getObjectId().toString();
+					  	}
 				  }
 				});
 		
 
 
 		Intent newIntent = new Intent(this, PostedActivity.class);
+		Intent results = new Intent(this, PostedActivity.class);
 		newIntent.putExtra(OBJECT_ID, itemID);
-		newIntent.putExtra(PHOTO, photoByteStream);
+		if(photoByteStream != null) newIntent.putExtra(PHOTO, photoByteStream);
 		newIntent.putExtra(ITEM_NAME, itemName);
 		newIntent.putExtra(ITEM_DESC, itemDescription);
 		startActivity(newIntent);

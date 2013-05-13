@@ -8,9 +8,56 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Search" >
 
-    <TextView
+    <EditText
+        android:id="@+id/itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="@string/edit_name" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/dis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/itemName"
+        android:ems="10"
+        android:hint="Distance"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/upper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lower"
+        android:ems="10"
+        android:hint="Upper Price"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/lower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/upper"
+        android:layout_below="@+id/dis"
+        android:ems="10"
+        android:hint="Lower Price"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/postItemtest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/upper"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="71dp"
+        android:onClick="postItem"
+        android:text="@string/post" />
 
 </RelativeLayout>

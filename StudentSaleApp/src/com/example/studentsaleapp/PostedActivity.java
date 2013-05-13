@@ -31,40 +31,18 @@ public class PostedActivity extends Activity {
 		photo = BitmapFactory.decodeStream(is);
 		
 		Intent intent = getIntent();
+		
+		if (itemID != null && itemDescription != null && itemName != null){
 		itemID = intent.getStringExtra(MainActivity.OBJECT_ID);
-		
-		
-		/*ParseQuery query = new ParseQuery("ItemPost");
-		 query.getInBackground(itemID, new GetCallback() {
-		     public void done(ParseObject object, ParseException e) {
-		         if (e == null) {
-		             parseObject = object;
-		             System.out.println("parse object was retrieved");
-		         } else {
-		             parseObject = null;
-		             System.out.println("parse object was not retrieved");
-		         }
-		     }
-		 });*/
-
-		ParseQuery query = new ParseQuery("ItemPost");
-		System.out.print(itemID);
-		try {
-			parseObject = query.get(itemID);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-		}
-			
+		System.out.print(itemID.toString());
 		itemName = intent.getStringExtra(MainActivity.ITEM_NAME);
-		itemDescription = intent.getStringExtra(MainActivity.ITEM_DESC);
-		photoArray = parseObject.getBytes("ItemPhoto");
-		photo = BitmapFactory.decodeByteArray(photoArray, 0, photoArray.length);
-		
-		
-		if (photo != null) {
+		itemDescription = intent.getStringExtra(MainActivity.ITEM_DESC);}
+				
+		try {
 			photoArray = intent.getByteArrayExtra(MainActivity.PHOTO);
 			photo = BitmapFactory.decodeByteArray(photoArray, 0, photoArray.length);
+		} catch (NullPointerException ne){
+			System.out.println(ne);
 		}
 		
 		TextView textName = (TextView) findViewById(R.id.name);    
