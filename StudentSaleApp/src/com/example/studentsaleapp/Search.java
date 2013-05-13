@@ -69,7 +69,7 @@ public void Retrieve(View view) {
 
 
 		Intent newIntent = new Intent(this, PostedActivity.class);
-		newIntent.putExtra(ITEM_NAME, ITEM_NAME2);
+		//newIntent.putExtra(ITEM_NAME, ITEM_NAME2);
 		startActivity(newIntent);
 		
 		

@@ -44,6 +44,8 @@ public class SellerPosts extends Activity {
 					int lower = Integer.parseInt(editLower.getText().toString());
 					query.whereGreaterThanOrEqualTo("price", lower);
 				}catch(Exception e){}
+			} catch (Exception ex) {
 			}
 			
+	}
 }

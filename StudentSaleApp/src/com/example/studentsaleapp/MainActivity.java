@@ -11,12 +11,16 @@ import com.parse.ParseObject;
 import com.parse.PushService;
 import com.parse.SaveCallback;
 
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.WallpaperManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +47,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	String itemName;
 	String itemDescription;
 	String itemID;
+	String userID;
+	String longitude;
+	String latitude;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,10 +108,22 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		EditText editDesc = (EditText) findViewById(R.id.itemDescription);
 		itemName = editName.getText().toString();
 		itemDescription = editDesc.getText().toString();
+		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+		userID = telephonyManager.getDeviceId(); 
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); 
+		Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER); 
+		latitude = Double.toString(location.getLatitude());
+	    longitude = Double.toString(location.getLongitude()); 
+		//parseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+		
 		
 		final ParseObject itemPost = new ParseObject("ItemPost");
 		itemPost.put("ItemName", itemName);
 		itemPost.put("ItemDescription", itemDescription);
+		itemPost.put("UserID", userID);
+		//itemPost.put("location", point);
+		itemPost.put("Longitude",longitude);
+		itemPost.put("Latitude",latitude);
 		if (photoByteStream != null)
 			itemPost.put("ItemPhoto", photoByteStream);
 		else 
