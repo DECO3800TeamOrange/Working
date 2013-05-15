@@ -1,14 +1,11 @@
 package com.example.studentsaleapp;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
-import com.parse.PushService;
 import com.parse.SaveCallback;
 
 import android.location.Location;
@@ -34,6 +31,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	public final static String OBJECT_ID = "com.example.StudentSaleApp.OBJECTID";
 	public final static String ITEM_NAME = "com.example.StudentSaleApp.ITEM_NAME";
 	public final static String ITEM_DESC = "com.example.StudentSaleApp.ITEM_DESC";
+	public final static String USER_ID = "com.example.StudentSaleApp.USER_ID";
 	
 	ImageButton ib;
 	ImageView iv;
@@ -108,18 +106,18 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		EditText editDesc = (EditText) findViewById(R.id.itemDescription);
 		itemName = editName.getText().toString();
 		itemDescription = editDesc.getText().toString();
-		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-		userID = telephonyManager.getDeviceId(); 
-		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); 
-		Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER); 
-		latitude = Double.toString(location.getLatitude());
-	    longitude = Double.toString(location.getLongitude()); 
-		//parseGeoPoint point = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
-		
+		userID = getUserID();
+		 
+
+		ParseGeoPoint point = getPhoneGeoPoint();
+		latitude = String.valueOf(point.getLatitude());
+	    longitude = String.valueOf(point.getLongitude()); 
 		
 		final ParseObject itemPost = new ParseObject("ItemPost");
 		itemPost.put("ItemName", itemName);
 		itemPost.put("ItemDescription", itemDescription);
+		itemPost.put("ItemNameLowerCase", itemName.toLowerCase());
+		itemPost.put("ItemDescriptionLowerCase", itemDescription.toLowerCase());
 		itemPost.put("UserID", userID);
 		//itemPost.put("location", point);
 		itemPost.put("Longitude",longitude);
@@ -142,11 +140,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
 
 		Intent newIntent = new Intent(this, PostedActivity.class);
-		Intent results = new Intent(this, PostedActivity.class);
+		Intent searchResults = new Intent(this, PostedActivity.class);
 		newIntent.putExtra(OBJECT_ID, itemID);
 		if(photoByteStream != null) newIntent.putExtra(PHOTO, photoByteStream);
 		newIntent.putExtra(ITEM_NAME, itemName);
 		newIntent.putExtra(ITEM_DESC, itemDescription);
+		newIntent.putExtra(USER_ID, userID);
 		startActivity(newIntent);
 	}
 	
@@ -157,6 +156,17 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		return stream.toByteArray();
 	}
 	
+	public ParseGeoPoint getPhoneGeoPoint() {
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); 
+		Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		ParseGeoPoint geoPoint = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
+		return geoPoint;
+		
+	}
 	
+	public String getUserID() {
+		TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+		return telephonyManager.getDeviceId();
+	}
 
 }

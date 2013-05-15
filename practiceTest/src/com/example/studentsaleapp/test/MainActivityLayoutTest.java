@@ -1,20 +1,20 @@
 package com.example.studentsaleapp.test;
-import android.test.ActivityInstrumentationTestCase2;
 
 import com.example.studentsaleapp.*;
 import com.example.studentsaleapp.R;
-
+import android.test.ActivityInstrumentationTestCase2;
 import android.graphics.Rect;
 import android.test.*;
 import android.view.View;
 import android.widget.Button;
 
-public class ItemTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class MainActivityLayoutTest extends
+		ActivityInstrumentationTestCase2<MainActivity> {
 	
 	private Button postItem;
 	private View mainLayout;
-	
-	public ItemTest() {
+
+	public MainActivityLayoutTest() {
 		super(MainActivity.class);
 	}
 
@@ -27,9 +27,6 @@ public class ItemTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
-	}
-	public void test() {
-		assertTrue(true);
 	}
 	
 	public void testPostButtonOnScreen() {   
