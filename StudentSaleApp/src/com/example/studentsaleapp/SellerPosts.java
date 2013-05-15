@@ -14,18 +14,39 @@ import android.widget.EditText;
 public class SellerPosts extends Activity {
 
 	@Override
+	/*
+	 * onCreate(Bundle)
+	 * 
+	 * Input:	Bundle object
+	 * Return:	None
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_seller_posts);
 	}
 
 	@Override
+	/*
+	 * onCreateOptionsMenu(Menu)
+	 * 	Sets up the options menu for this 'page'. Adds items to action bar if it is present.
+	 * Input:	Menu object
+	 * Return:	None
+	 * 
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.seller_posts, menu);
 		return true;
 	}
 	
+	/*
+	 * Retrieve()
+	 * 
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void Retrieve() {
 		Intent intent = getIntent();
 		EditText editName = (EditText) findViewById(R.id.itemName);
@@ -43,9 +64,11 @@ public class SellerPosts extends Activity {
 				{
 					int lower = Integer.parseInt(editLower.getText().toString());
 					query.whereGreaterThanOrEqualTo("price", lower);
-				}catch(Exception e){}
+				} catch (Exception e) {
+					
+				}
 			} catch (Exception ex) {
+				
 			}
-			
 	}
 }

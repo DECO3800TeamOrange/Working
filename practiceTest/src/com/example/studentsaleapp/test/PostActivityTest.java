@@ -15,12 +15,26 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 	ImageView itemPhoto;
 	Button postItem;
 	
+	/*
+	 * PostActivityTest()
+	 * 	Constructor class.
+	 * Input:	None
+	 * Return:	None
+	 */
 	public PostActivityTest() {
 		//ActivityInstrumentationTestCase2(MainActivity.class);
 		super(MainActivity.class);   
-		// TODO Auto-generated constructor stub
 	}
 	
+	/*
+	 * setUp()
+	 * 	Set up variables for testing. 
+	 * Input:	None
+	 * Return:	None
+	 * Throws:	Exception
+	 * 
+	 * @see android.test.ActivityInstrumentationTestCase2#setUp()
+	 */
 	protected void setUp() throws Exception {
 		super.setUp();
 		MainActivity mainActivity = getActivity();
@@ -32,37 +46,73 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 				mainActivity.findViewById(com.example.studentsaleapp.R.id.ivReturnedPic);
 		postItem = (Button)
 				mainActivity.findViewById(com.example.studentsaleapp.R.id.postItem);
-        }
+	}
 	
+	/*
+	 * tearDown()
+	 * 	Clear variables after testing.
+	 * Input:	None
+	 * Return:	None
+	 * Throws:	Exception
+	 * 
+	 * @see android.test.ActivityInstrumentationTestCase2#tearDown()
+	 */
 	protected void tearDown() throws Exception{
 		super.tearDown();	
 	}
 	
-	
-	
+	/*
+	 * testText()
+	 * 	Test that the text length of TextBox (itemText) is zero.
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void testText() {
 		assertTrue(itemText.getText().length() == 0);
 	}
 	
+	/*
+	 * testItemIsNotNull()
+	 * 	Test that the contents of TextBox (itemText) isn't null.
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void testItemIsNotNull() {
 		assertNotNull(itemText.getText());
 	}
 	
+	/*
+	 * testDescIsNotNull()
+	 * 	Test that the contents of TextBox (itemDesc) isn't null.
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void testDescIsNotNull() {
 		assertNotNull(itemDesc.getText());
 	}
 	
+	/*
+	 * testPhotoIsNotNull()
+	 * 	Test that the photo object (itemPhoto) isn't null.
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void testPhotoIsNotNull() {
-		assertNotNull(itemPhoto.getDrawable()
-				);
+		assertNotNull(itemPhoto.getDrawable());
 	}
-	//40 > item < 3 item length
+	/*
+	 * testItemRightLength()
+	 * 	Input text into text field and confirm that text doesn't exceed 
+	 * specified length. (40 > item < 3 item length)
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void testItemRightLength() {
 		boolean textCorrectLength;	
 		sendKeys("printer ENTER ");
 		sendKeys("$100 ENTER ");
 		sendKeys("ENTER");
-		if (itemText.length() > 3 && itemText.length() < 40)
+		if ((itemText.length() > 3) && (itemText.length() < 40))
 			textCorrectLength = true;
 		else 
 			textCorrectLength = false;
@@ -71,7 +121,13 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		assertTrue("Text is more than 3 characters", textCorrectLength);
 	}
 	
-	//40 > item length
+	/*
+	 * testItemNotTooLong()
+	 * 	Input text into text field and confirm that text doesn't exceed 
+	 * specified length. (40 > item length)
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void testItemNotTooLong() {
 		boolean textCorrectLength;
 		sendKeys("printer ENTER ");
@@ -84,7 +140,14 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		
 		assertTrue("Text is more than 40 characters", textCorrectLength);
 	}
-	//item length < 3 
+	
+	/*
+	 * testItemNotTooShort()
+	 * 	Input text into text field and confirm that text doesn't exceed 
+	 * specified length. (item length < 3)
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void testItemNotTooShort() {
 		boolean textCorrectLength;
 		sendKeys("printer ENTER ");
@@ -98,6 +161,12 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		assertTrue("Text is more than 3 characters", textCorrectLength);
 	}
 	
+	/*
+	 * testGetPhoneGeoPoint()
+	 * 	Test that location returns a value.
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void testGetPhoneGeoPoint() {
 		double longitude = 0;
 		double latitude = 0;
@@ -110,7 +179,4 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		assertTrue(longitude != 0);
 		assertTrue(latitude != 0);
 	}
-	
-	
-
 }

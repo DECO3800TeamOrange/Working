@@ -18,20 +18,40 @@ import android.widget.EditText;
 public class Search extends Activity {
 
 	@Override
+	/*
+	 * onCreate(Bundle)
+	 * 
+	 * Input:	Bundle object
+	 * Return:	None
+	 * 
+	 * @see android.app.Activity#onCreate(android.os.Bundle)
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
 	}
 
 	@Override
+	/*
+	 * onCreateOptionsMenu(Menu)
+	 * 	Sets up the options menu for this 'page'. Adds items to action bar if it is present.
+	 * Input:	Menu object
+	 * Return:	True if successful
+	 * 
+	 * @see android.app.Activity#onCreateOptionsMenu(android.view.Menu)
+	 */
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.search, menu);
 		return true;
 	}
 	
-public void nameSearch(View view) {
-		
+	/*
+	 * nameSearch(View)
+	 * 
+	 * Input:	View object representing ???
+	 * Return:	None
+	 */
+	public void nameSearch(View view) {
 		EditText editName = (EditText) findViewById(R.id.itemName);
 		EditText editDis = (EditText) findViewById(R.id.dis);
 		EditText editLower = (EditText) findViewById(R.id.lower);
@@ -69,19 +89,22 @@ public void nameSearch(View view) {
 					ITEM_NAME2= ITEM_NAME2 +kids.get(i).getString("title")+"\n";
 					Log.i("Info",""+kids.size());
 				}
-			}catch (ParseException e){
+			} catch (ParseException e) {
+				
 			}
-
 
 		Intent newIntent = new Intent(this, PostedActivity.class);
 		//newIntent.putExtra(ITEM_NAME, ITEM_NAME2);
 		startActivity(newIntent);
-		
-		
-		
 	}
+	
+	/*
+	 * locationSearch(View)
+	 * 
+	 * Input:	View object
+	 * Return:	None
+	 */
 	public void locationSearch(View view) {
 		
-}
-
+	}
 }

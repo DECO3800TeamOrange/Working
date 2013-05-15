@@ -14,10 +14,25 @@ public class MainActivityLayoutTest extends
 	private Button postItem;
 	private View mainLayout;
 
+	/*
+	 * MainActivityLayoutTest()
+	 * 	Constructor class.
+	 * Input:	None
+	 * Return:	None
+	 */
 	public MainActivityLayoutTest() {
 		super(MainActivity.class);
 	}
 
+	/*
+	 * setUp()
+	 * 	Set up variables for testing. 
+	 * Input:	None
+	 * Return:	None
+	 * Throws:	Exception
+	 * 
+	 * @see android.test.ActivityInstrumentationTestCase2#setUp()
+	 */
 	protected void setUp() throws Exception {
 		super.setUp();
 		MainActivity mainActivity = getActivity();
@@ -25,10 +40,26 @@ public class MainActivityLayoutTest extends
 		mainLayout = (View) mainActivity.findViewById(R.layout.activity_main);
 	}
 
+	/*
+	 * tearDown()
+	 * 	Clear variables after testing.
+	 * Input:	None
+	 * Return:	None
+	 * Throws:	Exception
+	 * 
+	 * @see android.test.ActivityInstrumentationTestCase2#tearDown()
+	 */
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
 	
+	/*
+	 * testPostButtonOnScreen()
+	 * 	Test that confirms that buttons have been established on the screen, and are
+	 * thus accessible.
+	 * Input:	None
+	 * Return:	None
+	 */
 	public void testPostButtonOnScreen() {   
 		   int fullWidth = mainLayout.getWidth();   
 		   int fullHeight = mainLayout.getHeight();   
@@ -42,7 +73,5 @@ public class MainActivityLayoutTest extends
 		           + mainLayoutLocation[0] > outRect.width() + viewLocation[0]);   
 		   assertTrue("Add button off the bottom of the screen", fullHeight   
 		           + mainLayoutLocation[1] > outRect.height() + viewLocation[1]);   
-		
-	}  
-
+	}
 }
