@@ -11,6 +11,10 @@ import android.content.Intent;
 import android.view.Menu;
 import android.widget.EditText;
 
+/*
+ * SellerPosts Class
+ * 	
+ */
 public class SellerPosts extends Activity {
 
 	@Override

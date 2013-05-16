@@ -9,7 +9,26 @@ import android.test.*;
 import com.example.studentsaleapp.MainActivity;
 import com.example.studentsaleapp.R;
 
+/*
+ * Test1 Class
+ * 
+ * Test1() -	-	-	-	-	constructor class
+ * setUp() -	-	-	-	-	set up variables for testing 
+ * tearDown() -	-	-	-	-	clear variables after testing
+ * testPreConditions() -	-	tests that the pretest conditions are met, that the environment has been set
+ *						up correctly.
+ * testItemText() -	-	-	-	test that the TextBox takes input, and that the received
+ * 						input is of sufficient length
+ * testCameraFunction() -	-	empty test, always returns true
+ * testPhotoConversion() -	-	checks if photo is successfully converted to 
+ * 						ByteArray from bitmap
+ * testPostButton() -	-	-	empty test, always returns true
+ */
 public class Test1 extends ActivityInstrumentationTestCase2<MainActivity> {
+
+	EditText itemText;
+	Button postItem;
+	Bitmap photo = BitmapFactory.decodeStream(super.getActivity().getResources().openRawResource(R.drawable.ic_launcher));
 
 	/*
 	 * Test1()
@@ -21,13 +40,9 @@ public class Test1 extends ActivityInstrumentationTestCase2<MainActivity> {
 		super(MainActivity.class);   
 	}
 	
-	EditText itemText;
-	Button postItem;
-	Bitmap photo = BitmapFactory.decodeStream(super.getActivity().getResources().openRawResource(R.drawable.ic_launcher));
-
 	/*
 	 * setUp()
-	 * 	Set up variables for testing. 
+	 * 	Set up variables for testing. Invoked before each test is run.
 	 * Input:	None
 	 * Return:	None
 	 * Throws:	Exception
@@ -57,6 +72,17 @@ public class Test1 extends ActivityInstrumentationTestCase2<MainActivity> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/*
+	 * testPreConditions()
+	 * 	Tests that the pretest conditions are met, that the environment has been set
+	 * up correctly.
+	 * Input:	None
+	 * Return:	None
+	 */
+	public void testPreConditions() {
+		
 	}
 	
 	/*

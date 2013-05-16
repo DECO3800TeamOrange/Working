@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/*
+ * Item Class
+ * 	
+ */
 public class Item extends Activity {
 
 	@Override

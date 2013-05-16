@@ -25,6 +25,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+/*
+ * MainActivity Class
+ * 	
+ */
 public class MainActivity extends Activity implements View.OnClickListener{
 	
 	public final static String PHOTO = "com.example.StudentSaleApp.PHOTO";

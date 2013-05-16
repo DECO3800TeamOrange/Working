@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/*
+ * Home Class
+ * 	
+ */
 public class Home extends Activity {
 
 	@Override

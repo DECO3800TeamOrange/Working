@@ -1,11 +1,25 @@
 package com.example.studentsaleapp.test;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
 import com.example.studentsaleapp.MainActivity;
 import android.test.*;
 import android.widget.*;
+import android.view.KeyEvent;
 
+/*
+ * activityTest Class
+ * 	Tests the functions of the MainActivity Class.
+ * 
+ * activityTest() -	-	-	-	constructor method
+ * setUp() -	-	-	-	-	setup variables for testing
+ * tearDown() -	-	-	-	-	clean up variables after testing
+ * testPreConditions() -	-	tests that the pretest conditions are met, that the environment has been set
+ *						up correctly
+ * testText() -	-	-	-	-	test that text value of TextBox is empty
+ * testItemTextValueBefore() -	test that TextBox isn't null
+ * testItemText() -	-	-	-	test that TextBox contents match set value
+ * testItemTextValue() -	-	test that TextBox is empty
+ * testThis() -	-	-	-	-	empty test, simply returns true
+ */
 public class activityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 	
 	EditText itemText;
@@ -24,7 +38,7 @@ public class activityTest extends ActivityInstrumentationTestCase2<MainActivity>
 	
 	/*
 	 * setUp()
-	 * 	Set up variables for testing. 
+	 * 	Set up variables for testing. Invoked before each test is run.
 	 * Input:	None
 	 * Return:	None
 	 * Throws:	Exception
@@ -33,7 +47,12 @@ public class activityTest extends ActivityInstrumentationTestCase2<MainActivity>
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
+		
+		// Turns off touch mode - necessary for key events to work 
+		setActivityInitialTouchMode(false);
+		
 		MainActivity mainActivity = getActivity();
+		
 		itemText = (EditText) 
 				mainActivity.findViewById(com.example.studentsaleapp.R.id.itemName);
 		postItem = (Button) 
@@ -54,12 +73,25 @@ public class activityTest extends ActivityInstrumentationTestCase2<MainActivity>
 	}
 	
 	/*
+	 * testPreConditions()
+	 * 	Tests that the pretest conditions are met, that the environment has been set
+	 * up correctly.
+	 * Input:	None
+	 * Return:	None
+	 */
+	public void testPreConditions() {
+		assertTrue(itemText != null);
+		assertTrue(postItem != null);
+	}
+	
+	/*
 	 * testText()
 	 * 	Test that text value of TextBox (itemName) is empty.
 	 * Input:	None
 	 * Return:	None
 	 */
 	public void testText() {
+		// -> problem ATM, comparing Editable with String
 		assertTrue(itemText.getText().equals(""));
 	}
 	
@@ -80,12 +112,20 @@ public class activityTest extends ActivityInstrumentationTestCase2<MainActivity>
 	 * Return:	None
 	 */
 	public void testItemText() {
-		boolean textRightLength = false;
-		itemText.setText("printer", TextView.BufferType.EDITABLE);	
-		if (itemText.length() > 3)
-			textRightLength = true;
+		//itemText.setText("printer", TextView.BufferType.EDITABLE);
 		
-		assertTrue("Text is more than 3 characters", itemText.getText().equals("printer"));
+		// Set focus of UI to the appropriate text field
+		itemText.requestFocus();
+		itemText.setSelection(0);
+		
+		// Send key inputs to device - 'printer'
+		this.sendKeys(KeyEvent.KEYCODE_P, KeyEvent.KEYCODE_R, KeyEvent.KEYCODE_I,
+				KeyEvent.KEYCODE_N, KeyEvent.KEYCODE_T, KeyEvent.KEYCODE_E,
+				KeyEvent.KEYCODE_R);
+		
+		// Check that input matches expectation 
+		// -> problem ATM, comparing Editable with String
+		assertTrue("Text does not match input", itemText.getText().equals("printer"));
 	}
 	
 	/*
@@ -95,6 +135,7 @@ public class activityTest extends ActivityInstrumentationTestCase2<MainActivity>
 	 * Return:	None
 	 */
 	public void testItemTextValue() {
+		// -> problem ATM, comparing Editable with String
 		assertTrue("it", itemText.getText().equals(""));
 	}
 	

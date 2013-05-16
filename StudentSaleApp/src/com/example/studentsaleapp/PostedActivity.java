@@ -14,6 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/*
+ * PostedActivity Class
+ * 	
+ */
 public class PostedActivity extends Activity {
 	String itemID;
 	String itemName;

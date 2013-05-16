@@ -1,13 +1,30 @@
 package com.example.studentsaleapp.test;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
 import com.example.studentsaleapp.MainActivity;
 import com.parse.ParseGeoPoint;
 
 import android.test.*;
 import android.widget.*;
 
+/*
+ * PostActivityTest Class
+ * 
+ * PostActivityTest() -	-	-	constructor class
+ * setUp() -	-	-	-	-	set up variables for testing 
+ * tearDown() -	-	-	-	-	clear variables after testing
+ * testPreConditions() -	-	tests that the pretest conditions are met, that the environment has been set
+ *						up correctly
+ * testText() -	-	-	-	-	test that the text length of TextBox (itemText) is zero
+ * testItemIsNotNull() -	-	test that the contents of TextBox (itemText) isn't null
+ * testDescIsNotNull() -	-	test that the contents of TextBox (itemDesc) isn't null
+ * testItemRightLength() -	-	input text into text field and confirm that text doesn't 
+ * 						exceed specified length (40 > item < 3 item length)
+ * testItemNotTooLong() -	-	input text into text field and confirm that text doesn't 
+ * 						exceed specified length (40 > item length)
+ * testItemNotTooShort() -	-	input text into text field and confirm that text doesn't 
+ * 						exceed specified length (item length < 3)
+ * testGetPhoneGeoPoint() -	-	test that location returns a value
+ */
 public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 	
 	EditText itemText;
@@ -28,7 +45,7 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 	
 	/*
 	 * setUp()
-	 * 	Set up variables for testing. 
+	 * 	Set up variables for testing. Invoked before each test is run.
 	 * Input:	None
 	 * Return:	None
 	 * Throws:	Exception
@@ -59,6 +76,17 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 	 */
 	protected void tearDown() throws Exception{
 		super.tearDown();	
+	}
+	
+	/*
+	 * testPreConditions()
+	 * 	Tests that the pretest conditions are met, that the environment has been set
+	 * up correctly.
+	 * Input:	None
+	 * Return:	None
+	 */
+	public void testPreConditions() {
+		
 	}
 	
 	/*
@@ -108,10 +136,12 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 	 * Return:	None
 	 */
 	public void testItemRightLength() {
-		boolean textCorrectLength;	
+		boolean textCorrectLength = false;
+		
 		sendKeys("printer ENTER ");
 		sendKeys("$100 ENTER ");
 		sendKeys("ENTER");
+		
 		if ((itemText.length() > 3) && (itemText.length() < 40))
 			textCorrectLength = true;
 		else 
@@ -129,7 +159,7 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 	 * Return:	None
 	 */
 	public void testItemNotTooLong() {
-		boolean textCorrectLength;
+		boolean textCorrectLength = false;
 		sendKeys("printer ENTER ");
 		sendKeys("$100 ENTER ");
 		sendKeys("ENTER");
@@ -149,7 +179,7 @@ public class PostActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 	 * Return:	None
 	 */
 	public void testItemNotTooShort() {
-		boolean textCorrectLength;
+		boolean textCorrectLength = false;
 		sendKeys("printer ENTER ");
 		sendKeys("$100 ENTER ");
 		sendKeys("ENTER");	

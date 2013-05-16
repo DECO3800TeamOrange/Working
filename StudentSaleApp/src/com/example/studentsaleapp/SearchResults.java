@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
+/*
+ * SearchResults Class
+ * 	Handles displaying results from the Parse Database.
+ */
 public class SearchResults extends Activity {
 
 	@Override

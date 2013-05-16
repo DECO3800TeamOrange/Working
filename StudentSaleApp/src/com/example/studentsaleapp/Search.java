@@ -15,6 +15,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+/*
+ * Search Class
+ * 	Handles searching for items in the Parse Database.
+ */
 public class Search extends Activity {
 
 	@Override

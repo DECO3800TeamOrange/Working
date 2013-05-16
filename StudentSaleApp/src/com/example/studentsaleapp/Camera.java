@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+/*
+ * Camera Class
+ * 	This class handles external camera access.
+ */
 public class Camera extends Activity implements View.OnClickListener {
 	
 	ImageButton ib;
