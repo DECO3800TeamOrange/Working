@@ -15,10 +15,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-/*
- * Camera Class
- * 	This class handles external camera access.
- */
 public class Camera extends Activity implements View.OnClickListener {
 	
 	ImageButton ib;
@@ -30,14 +26,6 @@ public class Camera extends Activity implements View.OnClickListener {
 	WallpaperManager wallpaperManager;
 	
 	@Override
-	/*
-	 * onCreate(Bundle)
-	 * 
-	 * Input:	Bundle object
-	 * Return:	None
-	 * 
-	 * @see android.app.Activity#onCreate(android.os.Bundle)
-	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.photo);
@@ -45,13 +33,6 @@ public class Camera extends Activity implements View.OnClickListener {
 		InputStream is = getResources().openRawResource(R.drawable.ic_launcher);
 		bmp = BitmapFactory.decodeStream(is);
 	}
-	
-	/*
-	 * initialize()
-	 * 	Set up some global variables and listeners.
-	 * Input:	None
-	 * Return:	None
-	 */
 	public void initialize() {
 		iv = (ImageView) findViewById (R.id.ivReturnedPic);
 		ib = (ImageButton)findViewById(R.id.ibTakePhoto);
@@ -59,15 +40,8 @@ public class Camera extends Activity implements View.OnClickListener {
 	}
 
 	@Override
-	/*
-	 * onClick(View)
-	 * 
-	 * Input:	View object
-	 * Return:	None
-	 * 
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 */
 	public void onClick(View v) {
+		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.ibTakePhoto:
 			i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -76,24 +50,19 @@ public class Camera extends Activity implements View.OnClickListener {
 		}
 		
 	}
-	
 	@Override
-	/*
-	 * onActivityResult(int, int, Intent)
-	 * 
-	 * Input:	int object representing ???
-	 * 			int object representing ???
-	 * 			Intent object holding data of ???
-	 * Return:	None
-	 * 
-	 * @see android.app.Activity#onActivityResult(int, int, android.content.Intent)
-	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_OK) {
 			Bundle extras = data.getExtras();
 			bmp = (Bitmap)extras.get("data");
 			iv.setImageBitmap(bmp);
 		}
+			
 	}
+
+	
+	
+
 }
