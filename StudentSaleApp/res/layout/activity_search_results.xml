@@ -8,9 +8,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".SearchResults" >
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/SearchResultsLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical" >
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/SearchResultsLayout"
+        android:layout_alignTop="@+id/SearchResultsLayout"
+        android:text="TextView" />
 
 </RelativeLayout>
