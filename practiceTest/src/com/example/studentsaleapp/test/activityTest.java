@@ -125,7 +125,7 @@ public class activityTest extends ActivityInstrumentationTestCase2<MainActivity>
 		
 		// Check that input matches expectation 
 		// -> problem ATM, comparing Editable with String
-		assertTrue("Text does not match input", itemText.getText().equals("printer"));
+		assertTrue("Text does not match input", itemText.getText().toString().equalsIgnoreCase("printer"));
 	}
 	
 	/*
@@ -145,7 +145,5 @@ public class activityTest extends ActivityInstrumentationTestCase2<MainActivity>
 	 * Input:	None
 	 * Return:	None
 	 */
-	public void testThis() {
-		assertTrue("It works", true);
-	}
+
 }

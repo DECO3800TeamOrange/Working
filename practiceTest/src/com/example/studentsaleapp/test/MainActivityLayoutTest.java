@@ -25,10 +25,7 @@ public class MainActivityLayoutTest extends ActivityInstrumentationTestCase2<Mai
 		mainLayout = (View) mainActivity.findViewById(R.layout.activity_main);
 	}
 
-	
-	public void test() {
-		assertTrue(true);
-	}
+
 	
 	public void testPostButtonOnScreen() {   
 		   int fullWidth = mainLayout.getWidth();   

@@ -84,5 +84,13 @@ public void nameSearch(View view) {
 	public void locationSearch(View view) {
 		
 }
+	public ParseObject[] returnItemObjectByLocation(ParseGeoPoint location) {
+		return null;
+		
+	}
+	public ParseObject[] searchItemObjectByName(String name) {
+		return null;
+		
+	}
 
 }
