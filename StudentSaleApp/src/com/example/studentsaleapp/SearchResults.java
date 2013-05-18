@@ -155,4 +155,15 @@ public class SearchResults extends Activity {
 				textDesc.setText(e.toString());
 			}
 		}
+public ParseObject[] searchItemObjectByName(String itemName) {
+		ParseObject[] b = null; 
+		//b = new ParseObject[2];
+		//ParseObject a = new ParseObject(itemName);
+		//b[0] = a;
+		return b;
+	}
+	public ParseObject[] returnItemObjectByLocation(ParseGeoPoint location) {
+		ParseObject[] b = null;
+		return b;
+	}
 }
