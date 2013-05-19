@@ -30,11 +30,11 @@ public final class R {
     public static final class id {
         public static final int ItemPageLayout=0x7f080000;
         public static final int ItemPhoto=0x7f080003;
+        public static final int ScrollView1=0x7f080017;
         public static final int SearchResultsLayout=0x7f080018;
         public static final int SellerPostsLayout=0x7f080019;
         public static final int action_settings=0x7f08001c;
         public static final int bSetWall=0x7f08001a;
-        public static final int button1=0x7f080017;
         public static final int description=0x7f080010;
         public static final int dis=0x7f080013;
         public static final int ibTakePhoto=0x7f08000a;

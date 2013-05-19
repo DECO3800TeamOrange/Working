@@ -118,21 +118,25 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		itemName = editName.getText().toString();
 		itemDescription = editDesc.getText().toString();
 		userID = getUserID();
-		 
-
-		ParseGeoPoint point = getPhoneGeoPoint();
-		latitude = String.valueOf(point.getLatitude());
-	    longitude = String.valueOf(point.getLongitude()); 
 		
 		final ParseObject itemPost = new ParseObject("ItemPost");
+		try{
+		ParseGeoPoint point = getPhoneGeoPoint();
+		latitude = String.valueOf(point.getLatitude());
+	    longitude = String.valueOf(point.getLongitude());
+		//itemPost.put("location", point);
+		itemPost.put("Longitude",longitude);
+		itemPost.put("Latitude",latitude);}
+		catch(Exception e){
+			ParseGeoPoint point = new ParseGeoPoint(-27.49,153.01);
+			itemPost.put("Location", point);
+		}
+		
 		itemPost.put("ItemName", itemName);
 		itemPost.put("ItemDescription", itemDescription);
 		itemPost.put("ItemNameLowerCase", itemName.toLowerCase());
 		itemPost.put("ItemDescriptionLowerCase", itemDescription.toLowerCase());
 		itemPost.put("UserID", userID);
-		//itemPost.put("location", point);
-		itemPost.put("Longitude",longitude);
-		itemPost.put("Latitude",latitude);
 		if (photoByteStream != null)
 			itemPost.put("ItemPhoto", photoByteStream);
 		else 
@@ -150,12 +154,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		
 
 
-		Intent newIntent = new Intent(this, PostedActivity.class);
-		newIntent.putExtra(OBJECT_ID, itemID);
-		if(photoByteStream != null) newIntent.putExtra(PHOTO, photoByteStream);
-		newIntent.putExtra(ITEM_NAME, itemName);
-		newIntent.putExtra(ITEM_DESC, itemDescription);
-		newIntent.putExtra(USER_ID, userID);
+		Intent newIntent = new Intent(this, SellerPosts.class);
 		startActivity(newIntent);
 	}
 	
