@@ -82,23 +82,29 @@ public class SearchResults extends Activity {
 				//search the lower case copy of the item name. Best way to do queries on parse.
 				query.whereContains("ItemNameLowerCase", searchName);
 				//lower price bound of the user's search
-				if (searchLower.length() > 0)
+				try
 				{
 					int lower = Integer.parseInt(searchLower);
 					query.whereGreaterThanOrEqualTo("Price", lower);
 					
+				}catch(Exception e){
+					
 				}
 				//upper price bound of the user's search
-				if (searchUpper.length() > 0)
+				try
 				{
 					int upper = Integer.parseInt(searchUpper);
 					query.whereLessThanOrEqualTo("Price", upper);
+				}catch(Exception e){
+					
 				}
 				//distance constraint on the search
-				if (searchDis.length() > 0)
+				try
 				{
 					int distance = Integer.parseInt(searchDis);
 					query.whereWithinKilometers("Location", location, distance);
+				}catch(Exception e){
+					
 				}
 				// completes the search with Parse.com
 				items = query.find();
@@ -153,8 +159,8 @@ public class SearchResults extends Activity {
 					    //Adds the result layout to the parent layout
 					    A.addView(B);
 						}catch(Exception e){
-							TextView textDesc = (TextView) findViewById(R.id.textView1);
-							textDesc.setText(e.toString());
+							//TextView textDesc = (TextView) findViewById(R.id.textView1);
+							//textDesc.setText(e.toString()+"hgfhgfhgf");
 						}
 				}
 				if (items.size()==0)
