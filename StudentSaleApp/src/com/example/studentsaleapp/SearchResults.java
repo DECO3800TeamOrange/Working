@@ -65,6 +65,7 @@ public class SearchResults extends Activity {
 	}
 
 	public void item(View v){
+		//Opens up a item page on the selected item
 		Intent newIntent = new Intent(this, Item.class);
 		newIntent.putExtra("ID", v.getTag().toString());
 		startActivity(newIntent);
@@ -74,7 +75,7 @@ public class SearchResults extends Activity {
 	public void nameSearch() {
 		
 		List<ParseObject> kids;
-		//Mock geo location
+		//Mock geo location for the prototype
 		ParseGeoPoint location = new ParseGeoPoint(-27.495069,152.984169);
 		ParseQuery query = new ParseQuery("ItemPost");
 			try {
@@ -103,12 +104,14 @@ public class SearchResults extends Activity {
 				for (int i=0; i < kids.size(); i++ )
 				{
 					try{
-						/*Builds */
+						/*Dynamically builds the layout for the search results*/
 						String ObjectID = kids.get(i).getObjectId();
+						//The parent layout
 						LinearLayout A = (LinearLayout) findViewById(R.id.SearchResultsLayout);
-					    A.layout(50, 50, 50, 50);
+						//Layout container for each result
 					    LinearLayout B = new LinearLayout(this);
 					    B.setOrientation(LinearLayout.HORIZONTAL);
+					    
 					    ImageView image = new ImageView(this);
 					    //converts the image file from parse into a usable image file
 					    byte[] photoByteStream = kids.get(i).getBytes("ItemPhoto");
@@ -117,28 +120,36 @@ public class SearchResults extends Activity {
 						//sets the image size limits
 						LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
 						image.setLayoutParams(layoutParams);
-						
+						//Associates the current layout object with the Parse.com ObjectID
 						image.setTag(ObjectID);
+						//Adds a on click function to the layout object
 						image.setOnClickListener(item_OnClickListener);
 						B.addView(image,0);
+						
 					    TextView test = new TextView(this);
 					    test.setTag(ObjectID);
+					    test.setOnClickListener(item_OnClickListener);
 					    test.setText(kids.get(i).getString("ItemName"));
 					    test.setPadding(8, 8, 8, 8);
 					    B.addView(test,1);
+					    
 					    TextView test2 = new TextView(this);
-					    test2.setTag("da");
+					    test2.setTag(ObjectID);
+					    test2.setOnClickListener(item_OnClickListener);
 					    test2.setText("$"+kids.get(i).getInt("Price"));
 					    test2.setPadding(8, 8, 8, 8);
 					    test2.setTag(ObjectID);
 					    B.addView(test2,2);
+					    
 					    TextView test3 = new TextView(this);
-					    test3.setTag("da");
+					    test3.setTag(ObjectID);
+					    test3.setOnClickListener(item_OnClickListener);
 					    test3.setText("distance: " + 
 					    location.distanceInKilometersTo(kids.get(i).getParseGeoPoint("Location")));
 					    test3.setPadding(8, 8, 8, 8);
 					    test3.setTag(ObjectID);
 					    B.addView(test3,3);
+					    //Adds the result layout to the parent layout
 					    A.addView(B);
 						}catch(Exception e){
 							TextView textDesc = (TextView) findViewById(R.id.textView1);
