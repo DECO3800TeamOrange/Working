@@ -52,25 +52,25 @@ public class SellerPosts extends Activity {
 	
 public void nameSearch() {
 		
-		List<ParseObject> kids;
+		List<ParseObject> items;
 		userID = getUserID();
 		ParseQuery query = new ParseQuery("ItemPost");
 			try {
 				query.whereContains("UserID", userID);
 
-				kids = query.find();
+				items = query.find();
 
 				
-				for (int i=0; i < kids.size(); i++ )
+				for (int i=0; i < items.size(); i++ )
 				{
 					try{
-						String ObjectID = kids.get(i).getObjectId();
+						String ObjectID = items.get(i).getObjectId();
 						LinearLayout A = (LinearLayout) findViewById(R.id.SellerPostsLayout);
 					    A.layout(50, 50, 50, 50);
 					    LinearLayout B = new LinearLayout(this);
 					    B.setOrientation(LinearLayout.HORIZONTAL);
 					    ImageView image = new ImageView(this);
-					    byte[] photoByteStream = kids.get(i).getBytes("ItemPhoto");
+					    byte[] photoByteStream = items.get(i).getBytes("ItemPhoto");
 						Bitmap photo = BitmapFactory.decodeByteArray(photoByteStream, 0, photoByteStream.length);
 						image.setImageBitmap(photo);
 						LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(100, 100);
@@ -79,13 +79,15 @@ public void nameSearch() {
 						image.setOnClickListener(item_OnClickListener);
 						B.addView(image,0);
 					    TextView test = new TextView(this);
-					    test.setTag(ObjectID);
-					    test.setText(kids.get(i).getString("ItemName"));
+						test.setTag(ObjectID);
+						test.setOnClickListener(item_OnClickListener);
+					    test.setText(items.get(i).getString("ItemName"));
 					    test.setPadding(8, 8, 8, 8);
 					    B.addView(test,1);
 					    TextView test2 = new TextView(this);
-					    test2.setTag("da");
-					    test2.setText(kids.get(i).getObjectId());
+						test2.setTag(ObjectID);
+						test2.setOnClickListener(item_OnClickListener);
+					    test2.setText("Price: $"+items.get(i).getInt("Price"));
 					    test2.setPadding(8, 8, 8, 8);
 					    test2.setTag(ObjectID);
 					    B.addView(test2,2);
@@ -94,6 +96,12 @@ public void nameSearch() {
 							TextView textDesc = (TextView) findViewById(R.id.textView1);
 							textDesc.setText(e.toString());
 						}
+				}
+				if (items.size()==0)
+				{
+					//if there are no objects in items then there are results for that search 
+					TextView textDesc = (TextView) findViewById(R.id.textView1);
+					textDesc.setText("No Results for Current Search");
 				}
 			}catch (ParseException e){
 				TextView textDesc = (TextView) findViewById(R.id.textView1);

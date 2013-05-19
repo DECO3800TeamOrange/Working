@@ -74,12 +74,13 @@ public class SearchResults extends Activity {
 	
 	public void nameSearch() {
 		
-		List<ParseObject> kids;
+		List<ParseObject> items;
 		//Mock geo location for the prototype
 		ParseGeoPoint location = new ParseGeoPoint(-27.495069,152.984169);
 		ParseQuery query = new ParseQuery("ItemPost");
 			try {
-				query.whereContains("ItemName", searchName);
+				//search the lower case copy of the item name. Best way to do queries on parse.
+				query.whereContains("ItemNameLowerCase", searchName);
 				//lower price bound of the user's search
 				if (searchLower.length() > 0)
 				{
@@ -100,12 +101,12 @@ public class SearchResults extends Activity {
 					query.whereWithinKilometers("Location", location, distance);
 				}
 				// completes the search with Parse.com
-				kids = query.find();
-				for (int i=0; i < kids.size(); i++ )
+				items = query.find();
+				for (int i=0; i < items.size(); i++ )
 				{
 					try{
 						/*Dynamically builds the layout for the search results*/
-						String ObjectID = kids.get(i).getObjectId();
+						String ObjectID = items.get(i).getObjectId();
 						//The parent layout
 						LinearLayout A = (LinearLayout) findViewById(R.id.SearchResultsLayout);
 						//Layout container for each result
@@ -114,7 +115,7 @@ public class SearchResults extends Activity {
 					    
 					    ImageView image = new ImageView(this);
 					    //converts the image file from parse into a usable image file
-					    byte[] photoByteStream = kids.get(i).getBytes("ItemPhoto");
+					    byte[] photoByteStream = items.get(i).getBytes("ItemPhoto");
 						Bitmap photo = BitmapFactory.decodeByteArray(photoByteStream, 0, photoByteStream.length);
 						image.setImageBitmap(photo);
 						//sets the image size limits
@@ -129,14 +130,14 @@ public class SearchResults extends Activity {
 					    TextView test = new TextView(this);
 					    test.setTag(ObjectID);
 					    test.setOnClickListener(item_OnClickListener);
-					    test.setText(kids.get(i).getString("ItemName"));
+					    test.setText(items.get(i).getString("ItemName"));
 					    test.setPadding(8, 8, 8, 8);
 					    B.addView(test,1);
 					    
 					    TextView test2 = new TextView(this);
 					    test2.setTag(ObjectID);
 					    test2.setOnClickListener(item_OnClickListener);
-					    test2.setText("$"+kids.get(i).getInt("Price"));
+					    test2.setText("$"+items.get(i).getInt("Price"));
 					    test2.setPadding(8, 8, 8, 8);
 					    test2.setTag(ObjectID);
 					    B.addView(test2,2);
@@ -145,7 +146,7 @@ public class SearchResults extends Activity {
 					    test3.setTag(ObjectID);
 					    test3.setOnClickListener(item_OnClickListener);
 					    test3.setText("distance: " + 
-					    location.distanceInKilometersTo(kids.get(i).getParseGeoPoint("Location")));
+					    location.distanceInKilometersTo(items.get(i).getParseGeoPoint("Location")));
 					    test3.setPadding(8, 8, 8, 8);
 					    test3.setTag(ObjectID);
 					    B.addView(test3,3);
@@ -156,8 +157,9 @@ public class SearchResults extends Activity {
 							textDesc.setText(e.toString());
 						}
 				}
-				if (kids.size()==0)
+				if (items.size()==0)
 				{
+					//if there are no objects in items then there are results for that search 
 					TextView textDesc = (TextView) findViewById(R.id.textView1);
 					textDesc.setText("No Results for Current Search");
 				}

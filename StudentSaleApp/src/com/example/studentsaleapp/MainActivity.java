@@ -70,6 +70,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	
 	}
 	
+	public void search(View view){
+		Intent newIntent = new Intent(this, Search.class);
+		startActivity(newIntent);
+	}
+	
+	public void sellerPosts(View view){
+		Intent newIntent = new Intent(this, SellerPosts.class);
+		startActivity(newIntent);
+	}
+	
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
@@ -141,7 +151,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
 
 		Intent newIntent = new Intent(this, PostedActivity.class);
-		Intent searchResults = new Intent(this, PostedActivity.class);
 		newIntent.putExtra(OBJECT_ID, itemID);
 		if(photoByteStream != null) newIntent.putExtra(PHOTO, photoByteStream);
 		newIntent.putExtra(ITEM_NAME, itemName);
