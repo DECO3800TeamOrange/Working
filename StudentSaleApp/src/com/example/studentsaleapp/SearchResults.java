@@ -2,6 +2,7 @@ package com.example.studentsaleapp;
 
 import java.util.List;
 
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
@@ -41,6 +42,8 @@ public class SearchResults extends Activity {
 	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Parse.initialize(this, "oSVz4UWfUShEgXckKkqA2G4gESIle3GL0egGqEQI","BU5O1f2A26nLwQOzTB4WEucrKGH7JU7tSyC1d7GW"); 
+		
 		Intent intent = getIntent();
 		searchName = intent.getStringExtra("Name");
 		searchLower = intent.getStringExtra("Lower");
