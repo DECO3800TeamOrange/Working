@@ -19,9 +19,13 @@
     <string name="title_activity_home">Home</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_search">Search</string>
+    <string name="hint_lower_price">Lower Price</string>
+    <string name="hint_upper_price">Upper Price</string>
+    <string name="hint_distance">Distance</string>
     <string name="title_activity_seller_posts">SellerPosts</string>
     <string name="title_activity_item">Item</string>
     <string name="title_activity_search_results">SearchResults</string>
     <string name="PostItem">Post An Item</string>
+    <string name="search_button">Search</string>
 
 </resources>

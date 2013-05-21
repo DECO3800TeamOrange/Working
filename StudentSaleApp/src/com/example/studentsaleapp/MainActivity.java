@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements View.OnClickListener{
 	
@@ -32,20 +33,22 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	public final static String ITEM_NAME = "com.example.StudentSaleApp.ITEM_NAME";
 	public final static String ITEM_DESC = "com.example.StudentSaleApp.ITEM_DESC";
 	public final static String USER_ID = "com.example.StudentSaleApp.USER_ID";
+	final static int cameraData = 0;
 	
 	ImageButton ib;
 	ImageView iv;
 	Intent i;
-	final static int cameraData = 0;
+	EditText location;
+
 	Bitmap itemPhoto;
 	Bitmap defaultPhoto;
 	byte[] photoByteStream;
 	byte[] defaultByteStream;
-	WallpaperManager wallpaperManager;
 	String itemName;
 	String itemDescription;
 	String itemID;
 	String userID;
+	ParseGeoPoint geoPoint;
 	String longitude;
 	String latitude;
 	
@@ -60,6 +63,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		InputStream is = getResources().openRawResource(R.drawable.ic_launcher);
 		defaultPhoto = BitmapFactory.decodeStream(is);
 		defaultByteStream = convertBmpToBytes(defaultPhoto);
+		
+		try {
+			geoPoint = getPhoneGeoPoint();
+			longitude = String.valueOf(geoPoint.getLongitude());
+			latitude = String.valueOf(geoPoint.getLatitude());
+			location.setText(longitude + ", "  + latitude);
+		} catch (Exception e) {
+			location.setText("Can't find you!");
+		}
+	
 	}
 
 	private void initialize() {
@@ -67,6 +80,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		iv = (ImageView) findViewById (R.id.ivReturnedPic);
 		ib = (ImageButton)findViewById(R.id.ibTakePhoto);
 		ib.setOnClickListener(this);
+		location = (EditText) findViewById (R.id.location);
 	
 	}
 	
@@ -112,50 +126,53 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		return true;
 	}
 	
-	public void postItem(View view) {
+	public void postItem(View v) {
 		EditText editName = (EditText) findViewById(R.id.itemName);
 		EditText editDesc = (EditText) findViewById(R.id.itemDescription);
 		itemName = editName.getText().toString();
 		itemDescription = editDesc.getText().toString();
 		userID = getUserID();
 		
-		final ParseObject itemPost = new ParseObject("ItemPost");
-		try{
-		ParseGeoPoint point = getPhoneGeoPoint();
-		latitude = String.valueOf(point.getLatitude());
-	    longitude = String.valueOf(point.getLongitude());
-		//itemPost.put("location", point);
-		itemPost.put("Longitude",longitude);
-		itemPost.put("Latitude",latitude);}
-		catch(Exception e){
-			ParseGeoPoint point = new ParseGeoPoint(-27.49,153.01);
-			itemPost.put("Location", point);
-		}
+		if (areValuesValid()) {
 		
-		itemPost.put("ItemName", itemName);
-		itemPost.put("ItemDescription", itemDescription);
-		itemPost.put("ItemNameLowerCase", itemName.toLowerCase());
-		itemPost.put("ItemDescriptionLowerCase", itemDescription.toLowerCase());
-		itemPost.put("UserID", userID);
-		if (photoByteStream != null)
-			itemPost.put("ItemPhoto", photoByteStream);
-		else 
-			itemPost.put("ItemPhoto", defaultByteStream);
-		itemPost.saveInBackground(new SaveCallback() {
-			  public void done(ParseException e) {
-				    //  Access the object id here
-				  if (e != null) {
-					  	itemID = e.toString();}
-				  else {
-					  	itemID = itemPost.getObjectId().toString();
-					  	}
-				  }
-				});
-		
+			final ParseObject itemPost = new ParseObject("ItemPost");
+			try{
+				itemPost.put("Location", geoPoint);
+				}
+			catch(Exception e){
+				ParseGeoPoint point = new ParseGeoPoint(-27.49,153.01);
+				itemPost.put("Location", point);
+			}
+			
+			itemPost.put("ItemName", itemName);
+			itemPost.put("ItemDescription", itemDescription);
+			itemPost.put("ItemNameLowerCase", itemName.toLowerCase());
+			itemPost.put("ItemDescriptionLowerCase", itemDescription.toLowerCase());
+			itemPost.put("UserID", userID);
+			if (photoByteStream != null)
+				itemPost.put("ItemPhoto", photoByteStream);
+			else 
+				itemPost.put("ItemPhoto", defaultByteStream);
+			itemPost.saveInBackground(new SaveCallback() {
+				  public void done(ParseException e) {
+					    //  Access the object id here
+					  if (e != null) {
+						  	itemID = e.toString();}
+					  else {
+						  	itemID = itemPost.getObjectId().toString();
+						  	}
+					  }
+					});
+			
+	
+	
+			Intent newIntent = new Intent(this, SellerPosts.class);
+			startActivity(newIntent);
+			
+		} else 
+			Toast.makeText(MainActivity.this, "Please make sure your item has a name and a description!",
+					Toast.LENGTH_LONG).show();
 
-
-		Intent newIntent = new Intent(this, SellerPosts.class);
-		startActivity(newIntent);
 	}
 	
 	public byte[] convertBmpToBytes(Bitmap bitmap) {
@@ -165,7 +182,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 		return stream.toByteArray();
 	}
 	
-	public ParseGeoPoint getPhoneGeoPoint() {
+	public ParseGeoPoint getPhoneGeoPoint() throws Exception{
 		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE); 
 		Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		ParseGeoPoint geoPoint = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
@@ -180,6 +197,18 @@ public class MainActivity extends Activity implements View.OnClickListener{
 	public String getSuburbByGeoPoint(ParseGeoPoint location) {
 		String suburb = "";
 		return suburb;
+	}
+	public Boolean areValuesValid() {
+		EditText editName = (EditText) findViewById(R.id.itemName);
+		EditText editDesc = (EditText) findViewById(R.id.itemDescription);
+		
+		if (	editName.getText().toString() == null || 
+				editName.getText().toString().equals("") ||
+				editDesc.getText().toString().equals("") ||
+				editDesc.getText().toString() == null)
+			return false;
+		else
+			return true;
 	}
 
 }

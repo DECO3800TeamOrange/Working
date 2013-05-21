@@ -27,7 +27,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/itemName"
         android:ems="10"
-        android:hint="Distance"
+        android:hint="@string/hint_distance"
         android:inputType="number" />
 
     <EditText
@@ -37,7 +37,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/lower"
         android:ems="10"
-        android:hint="Upper Price"
+        android:hint="@string/hint_upper_price"
         android:inputType="numberDecimal" />
 
     <EditText
@@ -47,7 +47,7 @@
         android:layout_alignLeft="@+id/upper"
         android:layout_below="@+id/dis"
         android:ems="10"
-        android:hint="Lower Price"
+        android:hint="@string/hint_lower_price"
         android:inputType="numberDecimal" />
 
     <Button
@@ -59,6 +59,5 @@
         android:layout_marginLeft="59dp"
         android:layout_marginTop="16dp"
         android:onClick="nameSearch"
-        android:text="Search" />
-
+        android:text="@string/search_button" />
 </RelativeLayout>
