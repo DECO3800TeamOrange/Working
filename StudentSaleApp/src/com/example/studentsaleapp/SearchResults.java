@@ -177,6 +177,13 @@ public class SearchResults extends Activity {
 				textDesc.setText(e.toString());
 			}
 		}
+	
+	public void clickPost(View view) {
+		if (view.getId() == R.id.PostAnItem) {
+			Intent i = new Intent(this, MainActivity.class);
+			startActivity(i);
+		}
+	}
 public ParseObject[] searchItemObjectByName(String itemName) {
 		ParseObject[] b = null; 
 		//b = new ParseObject[2];

@@ -30,11 +30,12 @@ public final class R {
     public static final class id {
         public static final int ItemPageLayout=0x7f080000;
         public static final int ItemPhoto=0x7f080003;
+        public static final int PostAnItem=0x7f080019;
         public static final int ScrollView1=0x7f080017;
         public static final int SearchResultsLayout=0x7f080018;
-        public static final int SellerPostsLayout=0x7f080019;
-        public static final int action_settings=0x7f08001c;
-        public static final int bSetWall=0x7f08001a;
+        public static final int SellerPostsLayout=0x7f08001a;
+        public static final int action_settings=0x7f08001d;
+        public static final int bSetWall=0x7f08001b;
         public static final int description=0x7f080010;
         public static final int dis=0x7f080013;
         public static final int ibTakePhoto=0x7f08000a;
@@ -46,7 +47,7 @@ public final class R {
         public static final int ivReturnedPic=0x7f080008;
         public static final int location=0x7f08000d;
         public static final int lower=0x7f080015;
-        public static final int menu_settings=0x7f08001b;
+        public static final int menu_settings=0x7f08001c;
         public static final int name=0x7f080011;
         public static final int postItem=0x7f08000c;
         public static final int postItemtest=0x7f080016;
@@ -78,6 +79,7 @@ public final class R {
         public static final int seller_posts=0x7f070006;
     }
     public static final class string {
+        public static final int PostItem=0x7f050015;
         public static final int action_settings=0x7f050010;
         public static final int app_name=0x7f050000;
         public static final int buttonTakePhoto=0x7f05000e;
