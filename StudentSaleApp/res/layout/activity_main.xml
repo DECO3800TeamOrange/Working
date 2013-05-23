@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
-    
 
     <ImageView
         android:id="@+id/ivReturnedPic"
@@ -11,20 +10,21 @@
         android:layout_height="125dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="20dp"
-        android:src="@drawable/ic_launcher" 
         android:scaleType="centerCrop"
-        />
+        android:src="@drawable/ic_launcher" />
 
     <EditText
         android:id="@+id/itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ibTakePhoto"
-        android:layout_alignRight="@+id/ivReturnedPic"
         android:layout_below="@+id/ivReturnedPic"
         android:layout_marginTop="31dp"
-        android:hint="@string/edit_name" >
+        android:layout_toLeftOf="@+id/ivReturnedPic"
+        android:background="@drawable/back"
+        android:fadingEdge="horizontal"
+        android:hint="@string/edit_name"
+        android:inputType="text" >
 
         <requestFocus />
     </EditText>
@@ -42,53 +42,40 @@
         android:inputType="textMultiLine"
         android:lines="4" />
 
-    <Button
-        android:id="@+id/postItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/itemDescription"
-        android:layout_below="@+id/itemDescription"
-        android:layout_marginTop="28dp"
-        android:onClick="postItem"
-        android:text="@string/post" />
-
     <EditText
         android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/postItem"
-        android:layout_alignLeft="@+id/itemDescription"
+        android:layout_alignRight="@+id/imageView2"
+        android:layout_below="@+id/postItem"
+        android:layout_marginTop="27dp"
         android:ems="10"
         android:text="@string/location" />
 
-    <ImageButton
-        android:id="@+id/ibTakePhoto"
-        android:layout_width="125dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/itemName"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="24dp"
-        android:layout_toLeftOf="@+id/ivReturnedPic"
-        android:src="@drawable/camera" />
-
-    <ImageView
-        android:id="@+id/imageView1"
+    <Button
+        android:id="@+id/postItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/ibTakePhoto"
-        android:layout_below="@+id/location"
-        android:layout_marginRight="24dp"
-        android:onClick="search"
-        android:src="@drawable/searchbut" />
+        android:layout_alignRight="@+id/location"
+        android:layout_below="@+id/itemDescription"
+        android:onClick="postItem"
+        android:text="@string/post" />
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/ivReturnedPic"
-        android:layout_alignTop="@+id/imageView1"
-        android:layout_marginLeft="16dp"
+        android:layout_below="@+id/postItem"
         android:onClick="sellerPosts"
         android:src="@drawable/account" />
-    
+
+    <ImageButton
+        android:id="@+id/ibTakePhoto"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivReturnedPic"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/camera" />
+
 </RelativeLayout>
